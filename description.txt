@@ -1,0 +1,39 @@
+=====
+QUASAR MOD FRAMEWORK
+=====
+
+DEVELOPED BY | EVENT HORIZON GAMES
+
+
+
+DISCLAIMERS | 
+
+QUASAR FRAMEWORK does not intend to add any content into itself besides special developer cosmetic items, as it is a library intended for use.
+
+The above cosmetics can be disabled with an implemented config.
+
+QUASAR does not work well with other mods due to the drastic changes and departures it makes from the base game.
+
+It is recommended to only use mods that are within the QUASAR family (listed below).
+
+Finally, Event Horizon Games is not responsible for any misuse, malicious handling or repurposing of the QUASAR FRAMEWORK.
+
+
+
+ABOUT QMF | 
+
+QUASAR was founded on a notion that all games should be bent to the will of both its own creators and outside creators alike.
+
+QUASAR FRAMEWORK is designed and worked into the base game to provide many new features and functions to the game as a whole.
+
+QUASAR adds various new forms of content, such as the capacity for player abilties, a managable XP and Quest system, and much more. 
+
+QUASAR also features many multiplayer-centric improvements, optimizations and features.
+
+
+
+JOIN THE QUASAR FAMILY | 
+
+To be part of the QUASAR family of mods, you must develop a mod that uses the QUASAR FRAMEWORK.
+
+- QUARK | An "Example Mod" for the QUASAR FRAMEWORK, devleoped by Event Horizon Games.

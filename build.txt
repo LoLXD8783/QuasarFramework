@@ -1,0 +1,3 @@
+displayName = Quasar Mod Framework
+author = Event Horizon Games
+version = 1.0
