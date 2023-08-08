@@ -42,6 +42,13 @@
                 overHealth -= 1;
         }
 
+        public void KillMe()
+        {
+            
+        }
+
+        public virtual void OnKill() { }
+
         public override void ResetEffects()
         {
             armorTotal = 50;

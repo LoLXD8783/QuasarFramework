@@ -15,9 +15,14 @@
 
         public Asset<Texture2D> itemTypeIcon;
 
+        public virtual void EditTooltipBook(TooltipBook tooltipBook) { }
+
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
+            EditTooltipBook(tooltipBook);
 
+            foreach (TooltipLine line in tooltipBook.bookPages[tooltipBookIndex].pageLines) //for each tooltip line in our book AT our page index.
+                tooltips.Add(line); //add to the current visible tooltips.
 
             base.ModifyTooltips(tooltips);
         }

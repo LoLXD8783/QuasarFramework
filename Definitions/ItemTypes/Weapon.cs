@@ -1,4 +1,6 @@
-﻿namespace QuasarFramework.Definitions.ItemTypes
+﻿using static QuasarFramework.Definitions.TooltipBook;
+
+namespace QuasarFramework.Definitions.ItemTypes
 {
     public abstract class Weapon : QuasarItem
     {
@@ -23,6 +25,34 @@
         public List<Modification> augmentSlots;
 
         public WeaponData weaponData;
+
+        public override void EditTooltipBook(TooltipBook tooltipBook)
+        {
+            TooltipPage weaponPage = new();
+
+            weaponPage.pageTitle = "Weapon Stats";
+
+            string statsLineText =
+                $"CRITICAL CHANCE | {statCritChance}% \n" +
+                $"CRITICAL DAMAGE | {statCritDamage}x \n" +
+                $"STATUS CHANCE | {statStatusChance}% \n";
+
+            if (weaponArchetype.isRanged)
+                statsLineText += 
+                    $"RANGE | {statRange} \n" +
+                    $"RELOAD SPEED | {statReload} \n";
+
+            var statsLine = new TooltipLine(Mod, "statsLine",
+                $"CRITICAL CHANCE | {statCritChance}% \n" +
+                $"CRITICAL DAMAGE | {statCritDamage}x \n" +
+                $"STATUS CHANCE | {statStatusChance}% \n");
+
+            //==============================================
+
+            weaponPage.pageLines.Add(statsLine);
+
+            base.EditTooltipBook(tooltipBook);
+        }
 
         public override bool? UseItem(Player player)
         {
