@@ -1,6 +1,6 @@
 ﻿namespace QuasarFramework.Definitions
 {
-    public class QuasarPlayer : ModPlayer
+    public partial class QuasarPlayer : ModPlayer
     {
         public Dictionary<Element, int> elementResistance;
 
@@ -64,9 +64,20 @@
 
         public override void Load()
         {
+            materialInventory ??= new();
+
             elementResistance ??= new();
 
             base.Load();
+        }
+
+        public override void Unload()
+        {
+            materialInventory = null;
+
+            elementResistance = null;
+
+            base.Unload();
         }
 
         #region UPDATERS
@@ -146,5 +157,29 @@
         }
 
         #endregion
+    }
+
+    //Inventory handler
+    partial class QuasarPlayer : ModPlayer
+    {
+        public Dictionary<Material, int> materialInventory;
+
+        public void AddToMatInventory(QuasarPlayer player, Material material, int amount)
+        {
+            if (player.Player.whoAmI != Main.myPlayer)
+                return;
+
+            if (materialInventory is null)
+                return;
+
+            if (materialInventory.ContainsKey(material))
+                materialInventory[material] += amount;
+
+            else
+            {
+                materialInventory.Add(material, amount);
+                Main.NewText($"Added {amount} {material.Name} to {player.Name}'s material inventory.");
+            }
+        }   
     }
 }
