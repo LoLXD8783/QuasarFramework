@@ -14,5 +14,7 @@
     <Folder Include="Definitions\NPCTypes\" />
     <Folder Include="Globals\" />
     <Folder Include="Systems\" />
+    <Folder Include="TWCLib\Definitions\" />
+    <Folder Include="TWCLib\WorldGen\" />
   </ItemGroup>
 </Project>

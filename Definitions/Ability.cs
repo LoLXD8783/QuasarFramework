@@ -18,7 +18,7 @@
 
         public virtual void SetDefaults() { }
 
-        public virtual void PassiveEffect() { }
+        public virtual void PassiveEffect(QuasarPlayer player) { }
 
         public virtual void OnCast() { }
 

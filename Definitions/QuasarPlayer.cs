@@ -1,12 +1,13 @@
 ﻿namespace QuasarFramework.Definitions
 {
+    //Main Updater
     public partial class QuasarPlayer : ModPlayer
     {
+        public Ability passiveAbility;
+
         public Dictionary<Element, int> elementResistance;
 
-        /// <summary>
-        /// Replaces Defense as the damage reduction for armor and other modifiers.
-        /// </summary>
+        /// <summary>Replaces Defense as the damage reduction for armor and other modifiers.</summary>
         public int armorTotal;
 
         public int energyMaximum, energyCurrent;
@@ -19,35 +20,10 @@
 
         public int levelMaximum, levelCurrent;
 
-        /// <summary>
-        /// Maximum => The maximum amount of health a player can have. <para></para>
-        /// Current => The Current amount of health a player has in a given instance. <para></para>
-        /// "Over" => The amount of additive-decaying health given from life-steal and other temporary effects.
-        /// </summary>
-        public int healthMaximum, healthCurrent, overHealth;
+        public List<Ability> playerAbilities = new(4);
 
-        public int shieldsMaximum, shieldsCurrent;
-
-        /// <summary>
-        /// The player's Specialization, or "class"
-        /// </summary>
+        /// <summary>The player's Specialization, or "class"</summary>
         public Specialization playerSpecialization;
-
-        public void OverHealthDecay()
-        {
-            if (overHealth <= 0)
-                return;
-
-            else
-                overHealth -= 1;
-        }
-
-        public void KillMe()
-        {
-            
-        }
-
-        public virtual void OnKill() { }
 
         public override void ResetEffects()
         {
@@ -82,9 +58,7 @@
 
         #region UPDATERS
 
-        /// <summary>
-        /// Updates logic pertaining to a player's specialization.
-        /// </summary>
+        /// <summary>Updates logic pertaining to a player's specialization.</summary>
         public virtual void UpdateSpecializations()
         {
             armorTotal += playerSpecialization.additiveArmor;
@@ -97,7 +71,19 @@
         {
             UpdateSpecializations();
 
+            passiveAbility.PassiveEffect(this);
+
             base.PreUpdate();
+        }
+
+        public override void PostUpdate()
+        {
+            OverHealthDecay();
+
+            if (healthCurrent <= 0 && overHealth <= 0 && Player.active && !Player.dead) //we check if active and NOT dead to make sure that KillMe() only runs once.
+                KillMe();
+
+            base.PostUpdate();
         }
 
         #endregion
@@ -180,6 +166,112 @@
                 materialInventory.Add(material, amount);
                 Main.NewText($"Added {amount} {material.Name} to {player.Name}'s material inventory.");
             }
-        }   
+        }
+    }
+
+    //Controls Handler
+    partial class QuasarPlayer : ModPlayer
+    {
+        public override void SetControls()
+        {
+
+
+            base.SetControls();
+        }
+    }
+
+    //Respawn Handler
+    partial class QuasarPlayer : ModPlayer
+    {
+        private int _respawnAnchorSetTimer = 60;
+
+        public Vector2 respawnAnchorLastPos;
+
+        public Vector2 GetRespawnAnchorPosition()
+        {
+            if (Player.whoAmI != Main.myPlayer)
+                return Vector2.Zero;
+
+            else
+            {
+                Vector2 currentPos = new(Player.position.X, Player.position.Y);
+                return currentPos;
+            }
+        }
+
+        public override void PreUpdateMovement()
+        {
+            if (Player.velocity.Y <= 0)
+                _respawnAnchorSetTimer--;
+
+            if (_respawnAnchorSetTimer <= 0)
+            {
+                Vector2 storedPos = respawnAnchorLastPos;
+
+                respawnAnchorLastPos = GetRespawnAnchorPosition();
+
+            }
+
+            base.PreUpdateMovement();
+        }
+    }
+
+    //Health / Resource Handler
+    partial class QuasarPlayer : ModPlayer
+    {
+        /// <summary>
+        /// Maximum => The maximum amount of health a player can have. <para></para>
+        /// Current => The Current amount of health a player has in a given instance. <para></para>
+        /// "Over" => The amount of additive-decaying health given from life-steal and other temporary effects.
+        /// </summary>
+        public int healthMaximum, healthCurrent, overHealth;
+
+        public int shieldsMaximum, shieldsCurrent;
+
+        public void KillMe()
+        {
+            if (Player.whoAmI != Main.myPlayer)
+                return;
+
+            else
+            {
+                Player.active = false;
+                Player.dead = true;
+
+                //print death reason
+
+                //spawn respawn anchor
+
+                Main.NewText($"{Player.name}", Color.Red);
+                OnKill();
+            }
+        }
+
+        public void OverHealthDecay()
+        {
+            if (overHealth <= 0)
+                return;
+
+            else
+                overHealth--;
+        }
+
+        public virtual void OnKill() { }
+    }
+
+    /// <summary>A defined reason the player died.</summary>
+    public struct PlayerDeathReason
+    {
+        /// <summary>The player who died.</summary>
+        public QuasarPlayer playerWhoDied;
+
+        /// <summary>The <see cref="Entity"/> responsible for the death.</summary>
+        public Entity killedBy;
+
+        /// <summary>The internal title of the death reason.</summary>
+        public string deathReasonTitle;
+
+        /// <summary>The detailed description of the death.</summary>
+        public string deathReasonDesc;
     }
 }
