@@ -44,6 +44,8 @@
 
             elementResistance ??= new();
 
+            On_Player.Hurt_PlayerDeathReason_int_int_bool_bool_bool_int_bool_float += ManualHurtDetour;
+
             base.Load();
         }
 
@@ -217,6 +219,7 @@
     }
 
     //Health / Resource Handler
+
     partial class QuasarPlayer : ModPlayer
     {
         /// <summary>
@@ -228,8 +231,11 @@
 
         public int shieldsMaximum, shieldsCurrent;
 
+        
+
         public void KillMe()
         {
+
             if (Player.whoAmI != Main.myPlayer)
                 return;
 
@@ -257,21 +263,41 @@
         }
 
         public virtual void OnKill() { }
-    }
 
-    /// <summary>A defined reason the player died.</summary>
-    public struct PlayerDeathReason
-    {
-        /// <summary>The player who died.</summary>
-        public QuasarPlayer playerWhoDied;
+        private double ManualHurtDetour(On_Player.orig_Hurt_PlayerDeathReason_int_int_bool_bool_bool_int_bool_float orig, Player self, PlayerDeathReason damageSource, int Damage, int hitDirection, bool pvp, bool quiet, bool Crit, int cooldownCounter, bool dodgeable, float armorPenetration)
+        {
+            if (overHealth > 0 )
+            {
+                if (overHealth > Damage)
+                    overHealth -= Damage;
 
-        /// <summary>The <see cref="Entity"/> responsible for the death.</summary>
-        public Entity killedBy;
+                else
+                {
+                    Damage -= overHealth;
+                    overHealth = 0;
+                }
+            }
 
-        /// <summary>The internal title of the death reason.</summary>
-        public string deathReasonTitle;
+            if (shieldsCurrent > 0)
+            {
+                if (shieldsCurrent > Damage)
+                    shieldsCurrent -= Damage;
 
-        /// <summary>The detailed description of the death.</summary>
-        public string deathReasonDesc;
+                else
+                {
+                    Damage -= shieldsCurrent;
+                    shieldsCurrent = 0;
+                }
+            }
+
+            if (healthCurrent > 0)
+            {
+                //armor calculations here
+
+                healthCurrent -= Damage;
+            }
+
+            return orig.Invoke(self, damageSource, 0, 0, false, true, false, 0, false, 0.0f);
+        }
     }
 }
