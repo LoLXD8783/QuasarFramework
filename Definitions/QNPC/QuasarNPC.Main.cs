@@ -1,18 +1,8 @@
-﻿namespace QuasarFramework.Definitions
+﻿namespace QuasarFramework.Definitions.QNPC
 {
-    public abstract class QuasarNPC : ModNPC
+    public abstract partial class QuasarNPC : ModNPC
     {
         public Faction npcFaction;
-
-        public int armor;
-
-        public int healthCurrent;
-
-        public int healthMaximum;
-
-        public int shieldsCurrent;
-
-        public int shieldsMaximum;
 
         public override bool CanHitNPC(NPC target) => false;
 
