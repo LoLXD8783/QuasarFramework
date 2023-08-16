@@ -20,7 +20,7 @@
         {
             ModTypeLookup<Faction>.Register(this);
 
-            //ID = FactionLoader.Add(this);
+            ID = FactionLoader.Add(this);
 
             throw new NotImplementedException();
         }

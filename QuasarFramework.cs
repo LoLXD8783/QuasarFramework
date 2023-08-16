@@ -16,19 +16,19 @@ namespace QuasarFramework
 			switch (inputType)
 			{
 				case InputType.Info:
-					mod.Logger.Info(text); break;
+					mod.Logger.Info("[QUASAR] " + text); break;
 
 				case InputType.Debug:
-					mod.Logger.Debug(text); break;
+					mod.Logger.Debug("[QUASAR] " + text); break;
 
 				case InputType.Warn:
-					mod.Logger.Warn(text); break;
+					mod.Logger.Warn("[QUASAR] " + text); break;
 
 				case InputType.Error:
-					mod.Logger.Error(text); break;
+					mod.Logger.Error("[QUASAR] " + text); break;
 
 				case InputType.Fatal:
-					mod.Logger.Fatal(text); break;
+					mod.Logger.Fatal("[QUASAR] " + text); break;
 			}
 		}
 

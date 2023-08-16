@@ -13,6 +13,8 @@
   <ItemGroup>
     <Folder Include="Definitions\NPCTypes\" />
     <Folder Include="Globals\" />
+    <Folder Include="GUI\SocialGUI\" />
+    <Folder Include="GUI\TradingGUI\" />
     <Folder Include="Systems\" />
     <Folder Include="TWCLib\Definitions\" />
     <Folder Include="TWCLib\WorldGen\" />
