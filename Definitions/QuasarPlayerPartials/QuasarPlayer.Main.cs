@@ -1,24 +1,10 @@
-﻿namespace QuasarFramework.Definitions.QPlayer
+﻿namespace QuasarFramework.Definitions.QuasarPlayerPartials
 {
     //Main Updater
     public partial class QuasarPlayer : ModPlayer
     {
         public Dictionary<Element, int> elementResistance;
 
-        /// <summary>Replaces Defense as the damage reduction for armor and other modifiers.</summary>
-        public int armorTotal;
-
-        public int energyMaximum, energyCurrent;
-
-        /// <summary>
-        /// Current => The current amount of experience the player has at a given instance per level. <para></para>
-        /// Total => The total amount of experience earned from all levels.
-        /// </summary>
-        public int experienceCurrent, experienceTotal;
-
-        public int levelMaximum, levelCurrent;
-
-        /// <summary>The player's Specialization, or "class"</summary>
         public Specialization playerSpecialization;
 
         public override void ResetEffects()
@@ -56,7 +42,6 @@
 
         #region UPDATERS
 
-        /// <summary>Updates logic pertaining to a player's specialization.</summary>
         public virtual void UpdateSpecializations()
         {
             armorTotal += playerSpecialization.additiveArmor;
@@ -91,6 +76,7 @@
         public override void SaveData(TagCompound tag)
         {
             tag[nameof(experienceCurrent)] = experienceCurrent;
+            tag[nameof(experienceTotal)] = experienceTotal;
 
             base.SaveData(tag);
         }
@@ -98,6 +84,7 @@
         public override void LoadData(TagCompound tag)
         {
             experienceCurrent = tag.Get<int>(nameof(experienceCurrent));
+            experienceTotal = tag.Get<int>(nameof(experienceTotal));
 
             base.LoadData(tag);
         }

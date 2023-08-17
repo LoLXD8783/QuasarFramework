@@ -1,4 +1,4 @@
-﻿namespace QuasarFramework.Definitions.QNPC
+﻿namespace QuasarFramework.Definitions.QuasarNPCPartials
 {
     public abstract partial class QuasarNPC : ModNPC
     {

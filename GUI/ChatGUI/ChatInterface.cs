@@ -1,16 +1,16 @@
 ﻿namespace QuasarFramework.GUI.ChatGUI 
 { 
-    internal class IngameChatInterface : UIState
+    internal class ChatInterface : UIState
     {
-        public List<IngameChatTab> chatTabs;
+        public List<ChatTab> chatTabs;
 
         //internal panel
 
-        public IngameChatTab GlobalChatTab;
+        public ChatTab GlobalChatTab;
 
-        public IngameChatTab LFGChatTab;
+        public ChatTab LFGChatTab;
 
-        public IngameChatTab TradingChatTab;
+        public ChatTab TradingChatTab;
 
         //tab globalchattab
 

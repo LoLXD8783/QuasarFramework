@@ -4,7 +4,7 @@ global using Microsoft.Xna.Framework.Input;
 
 global using QuasarFramework.Definitions;
 global using QuasarFramework.Definitions.ItemTypes;
-global using QuasarFramework.Definitions.QPlayer;
+global using QuasarFramework.Definitions.QuasarPlayerPartials;
 global using QuasarFramework.Enums;
 global using QuasarFramework.Loaders;
 

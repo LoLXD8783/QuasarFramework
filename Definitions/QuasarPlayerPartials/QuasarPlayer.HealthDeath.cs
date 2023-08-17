@@ -1,9 +1,12 @@
-﻿namespace QuasarFramework.Definitions.QPlayer
+﻿namespace QuasarFramework.Definitions.QuasarPlayerPartials
 {
     public partial class QuasarPlayer : ModPlayer
     {
         /// <summary> Whether or not this player will use pre-determined hit effects. <para></para> Return false to write your own logic in <see cref="OnHit()"/> </summary>
         public bool useVanillaHitEffects = true;
+
+        /// <summary>Replaces Defense as the damage reduction for armor and other modifiers.</summary>
+        public int armorTotal;
 
         /// <summary>
         /// Maximum => The maximum amount of health a player can have. <para></para>

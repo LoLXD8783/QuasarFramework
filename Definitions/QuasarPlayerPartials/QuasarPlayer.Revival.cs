@@ -1,4 +1,4 @@
-﻿namespace QuasarFramework.Definitions.QPlayer
+﻿namespace QuasarFramework.Definitions.QuasarPlayerPartials
 {
     public partial class QuasarPlayer : ModPlayer
     {

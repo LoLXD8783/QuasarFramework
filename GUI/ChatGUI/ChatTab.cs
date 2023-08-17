@@ -2,9 +2,11 @@
 
 namespace QuasarFramework.GUI.ChatGUI
 {
-    internal class IngameChatTab : SafeUIElement
+    internal class ChatTab : SafeUIElement
     {
         private readonly ChatTabInner innerBox = new();
+
+        public bool IsActiveTab;
 
         /// <summary> How many messages are viewable in scroll history before they're deleted. </summary>
         public int chatLimit;

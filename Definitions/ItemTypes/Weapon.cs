@@ -6,6 +6,8 @@ namespace QuasarFramework.Definitions.ItemTypes
     {
         public Archetype weaponArchetype;
 
+        public bool isReloading;
+
         public Element weaponElement;
 
         public double statCritDamage;
@@ -23,8 +25,6 @@ namespace QuasarFramework.Definitions.ItemTypes
         public int statReload;
 
         public List<Modification> augmentSlots;
-
-        public WeaponData weaponData;
 
         public override void EditTooltipBook(TooltipBook tooltipBook)
         {
@@ -54,6 +54,66 @@ namespace QuasarFramework.Definitions.ItemTypes
             base.EditTooltipBook(tooltipBook);
         }
 
+        private int CalculateReloadTime()
+        {
+            int reloadTime = 0;
+
+            return reloadTime;
+        }
+
+        public void Reload()
+        {
+            int timer = CalculateReloadTime(); 
+
+            while (timer > 0)
+            {
+                isReloading = true;
+                timer--;
+
+                if (timer <= 0)
+                {
+                    if (magazineCurrent == 0)
+                    {
+                        if (ammoCurrent <= magazineMax)
+                        {
+                            magazineMax = ammoCurrent;
+                            ammoCurrent = 0;
+                        }
+
+                        else
+                        {
+                            magazineCurrent += magazineMax;
+                            ammoCurrent -= magazineMax;
+                        }
+                    }
+
+                    else if (magazineCurrent > 0)
+                    {
+                        int difference = magazineMax - magazineCurrent;
+
+                        if (difference > ammoCurrent)
+                        {
+                            magazineCurrent += ammoCurrent;
+                            ammoCurrent = 0;
+                        }
+                        
+                        else
+                        {
+                            ammoCurrent -= difference;
+                            magazineCurrent = magazineMax;
+                        }
+                    }
+                    break;
+                }
+            }
+            QuasarFramework.WriteLogger(Mod, QuasarFramework.InputType.Debug, $"Weapon reloaded, ammo: {ammoCurrent} | mag: {magazineCurrent}");
+        }
+
+        public void CalculateDamageFalloff()
+        {
+
+        }
+
         public override bool? UseItem(Player player)
         {
             if (weaponArchetype.CanUse())
@@ -78,10 +138,5 @@ namespace QuasarFramework.Definitions.ItemTypes
         {
             base.UpdateInventory(player);
         }
-    }
-
-    public struct WeaponData
-    {
-
     }
 }

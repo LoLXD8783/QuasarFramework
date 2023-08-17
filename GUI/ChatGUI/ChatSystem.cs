@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuasarFramework.GUI.ChatGUI
 {
-    internal class IngameChatSystem
+    internal class ChatSystem
     {
     }
 }
