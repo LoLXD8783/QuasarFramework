@@ -1,52 +1,67 @@
 ﻿namespace QuasarFramework.Definitions
 {
-    public abstract class StatusEffect : ModBuff
+    public abstract class StatusEffect : ModType
     {
-        public float effectStackMultiplier;
+        public bool canStack = false;
 
-        public int thisBuffTime;
+        public bool useVanillaStackReduction = true;
+
+        public int effectTimeCurrent;
+
+        public int effectTimeMaximum;
 
         public int effectStack;
 
-        public override bool ReApply(NPC npc, int time, int buffIndex)
+        public int effectStackMaximum;
+
+        public int ID { get; private set; }
+
+        internal void ReapplyMe(int addativeTime = 0)
         {
-            return base.ReApply(npc, time, buffIndex);
-        }
-
-        public override bool ReApply(Player player, int time, int buffIndex)
-        {
-            effectStack++;
-            player.buffTime[this.Type] = thisBuffTime;
-
-            return base.ReApply(player, time, buffIndex);
-        }
-
-        public override bool RightClick(int buffIndex) => false;
-
-        public override void PostDraw(SpriteBatch spriteBatch, int buffIndex, BuffDrawParams drawParams)
-        {
-            Utils.DrawBorderString(spriteBatch, effectStack.ToString(), drawParams.Position + Vector2.One, Color.White, 0.75f);
-            //draw stack value.
-
-            base.PostDraw(spriteBatch, buffIndex, drawParams);
-        }
-
-        public override void Update(NPC npc, ref int buffIndex)
-        {
-            base.Update(npc, ref buffIndex);
-        }
-
-        public override void Update(Player player, ref int buffIndex)
-        {
-            if (player.buffTime[this.Type] <= 0)
+            if (canStack)
             {
-                effectStack--; //reduce our stack
-                player.buffTime[this.Type] = thisBuffTime; //reset the timer
+                effectStack++;
+
+                if (addativeTime <= 0)
+                    effectTimeCurrent = effectTimeMaximum;
+
+                else
+                    effectTimeCurrent += addativeTime;
             }
 
+            else
+            {
+                if (addativeTime <= 0)
+                    effectTimeCurrent = effectTimeMaximum;
 
-
-            base.Update(player, ref buffIndex);
+                else
+                    effectTimeCurrent += addativeTime;
+            }
         }
+
+        public void UpdateMe()
+        {
+            if (effectTimeCurrent >= effectTimeMaximum)
+                effectTimeCurrent = effectStackMaximum;
+
+            effectTimeCurrent--;
+
+            if (effectTimeCurrent <= 0 && effectStack >= 0) 
+            {
+                effectStack--;
+                effectTimeCurrent = effectTimeMaximum;
+            }
+        }
+
+        public virtual void OnApply(QuasarNPC npc) { }
+        public virtual void OnApply(QuasarPlayer player) { }
+
+        public virtual void OnReapply(QuasarNPC npc) { }
+        public virtual void OnReapply(QuasarPlayer player) { }
+
+        public virtual void SetDefaults() { }
+
+        public virtual void UpdateEffect(QuasarNPC npc) { }
+        public virtual void UpdateEffect(QuasarPlayer player) { }
     }
 }

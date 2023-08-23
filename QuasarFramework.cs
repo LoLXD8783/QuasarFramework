@@ -47,6 +47,14 @@ namespace QuasarFramework
 
 			ElementLoader.Load();
 
+			FactionLoader.Load();
+
+			QuasarRarityLoader.Load();
+
+			StatusEffectLoader.Load();
+
+			SpecializationLoader.Load();
+
 			TraitLoader.Load();
 
             base.Load();
@@ -58,13 +66,19 @@ namespace QuasarFramework
 
 			ElementLoader.Unload();
 
+			FactionLoader.Unload();
+
+			QuasarRarityLoader.Unload();
+
+			StatusEffectLoader.Unload();
+
+			SpecializationLoader.Unload();
+
 			TraitLoader.Unload();
 
             base.Unload();
 		}
-
 	}
-
 
 	//Netcode Handler
 	partial class QuasarFramework : Mod

@@ -1,6 +1,6 @@
 ﻿namespace QuasarFramework.Definitions
 {
-    internal abstract class Trait : ModType, ILocalizedModType
+    public abstract class Trait : ModType, ILocalizedModType
     {
         public int ID { get; private set; }
 
