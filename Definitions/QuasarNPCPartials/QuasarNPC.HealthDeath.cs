@@ -2,12 +2,16 @@
 {
     public abstract partial class QuasarNPC : ModNPC
     {
+        public Dictionary<Element, int> resistanceValues;
+
         public int armor;
 
-        public int healthCurrent, healthMaximum;
+        public int healthCurrent;
+        public int healthMaximum;
 
-        public int shieldsCurrent, shieldsMaximum;
+        public int shieldsCurrent;
+        public int shieldsMaximum;
 
-        
+
     }
 }

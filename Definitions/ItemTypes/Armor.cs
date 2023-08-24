@@ -6,6 +6,19 @@
 
         public List<Modification> augmentSlots;
 
+        public void UpdatePlayer(QuasarPlayer player)
+        {
+            player.statAgility += statsArray[0];
+            player.statClairvoyance += statsArray[1];
+            player.statDurability += statsArray[2];
+            player.statLuck += statsArray[3];
+            player.statRecuperation += statsArray[4];
+
+            UpdateArmor(player);
+        }
+
+        public virtual void UpdateArmor(QuasarPlayer player) { }
+
         public override void OnCreated(ItemCreationContext context)
         {
             statsArray = new int[5];
@@ -15,11 +28,6 @@
             augmentSlots ??= new(5);
 
             base.OnCreated(context);
-        }
-
-        public void UpdatePlayer(QuasarPlayer player)
-        {
-
         }
 
         public override void SetDefaults()
