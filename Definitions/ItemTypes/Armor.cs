@@ -6,7 +6,12 @@
 
         public List<Modification> augmentSlots;
 
-        public void UpdatePlayer(QuasarPlayer player)
+        internal void RollStats()
+        {
+
+        }
+
+        internal void UpdatePlayer(QuasarPlayer player)
         {
             player.statAgility += statsArray[0];
             player.statClairvoyance += statsArray[1];
@@ -23,7 +28,7 @@
         {
             statsArray = new int[5];
 
-            //roll stats
+            RollStats();
 
             augmentSlots ??= new(5);
 

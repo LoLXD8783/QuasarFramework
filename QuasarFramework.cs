@@ -43,6 +43,8 @@ namespace QuasarFramework
 
         public override void Load()
         {
+			ArchetypeLoader.Load();
+
 			AbilityLoader.Load();
 
 			ElementLoader.Load();
@@ -62,6 +64,8 @@ namespace QuasarFramework
 
         public override void Unload()
         {
+			ArchetypeLoader.Unload();
+
 			AbilityLoader.Unload();
 
 			ElementLoader.Unload();

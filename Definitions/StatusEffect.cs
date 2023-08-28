@@ -6,6 +6,8 @@
 
         public bool useVanillaStackReduction = true;
 
+        public float effectProcChance;
+
         public int effectTimeCurrent;
 
         public int effectTimeMaximum;

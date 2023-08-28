@@ -41,6 +41,8 @@
 
     public sealed class AbilityLoader : QuasarLoader<Ability> { }
 
+    public sealed class ArchetypeLoader : QuasarLoader<Archetype> { }
+
     public sealed class ElementLoader : QuasarLoader<Element> { }
 
     public sealed class FactionLoader : QuasarLoader<Ability> { }

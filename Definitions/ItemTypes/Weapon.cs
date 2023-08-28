@@ -16,9 +16,13 @@ namespace QuasarFramework.Definitions.ItemTypes
 
         public float statStatusChance;
 
-        public int ammoCurrent, ammoMax;
+        public int ammoCurrent;
 
-        public int magazineCurrent, magazineMax;
+        public int ammoMax;
+
+        public int magazineCurrent;
+
+        public int magazineMax;
 
         public int statRange;
 
@@ -26,44 +30,11 @@ namespace QuasarFramework.Definitions.ItemTypes
 
         public List<Modification> augmentSlots;
 
-        public override void EditTooltipBook(TooltipBook tooltipBook)
-        {
-            TooltipPage weaponPage = new();
-
-            weaponPage.pageTitle = "Weapon Stats";
-
-            string statsLineText =
-                $"CRITICAL CHANCE | {statCritChance}% \n" +
-                $"CRITICAL DAMAGE | {statCritDamage}x \n" +
-                $"STATUS CHANCE | {statStatusChance}% \n";
-
-            if (weaponArchetype.isRanged)
-                statsLineText += 
-                    $"RANGE | {statRange} \n" +
-                    $"RELOAD SPEED | {statReload} \n";
-
-            var statsLine = new TooltipLine(Mod, "statsLine",
-                $"CRITICAL CHANCE | {statCritChance}% \n" +
-                $"CRITICAL DAMAGE | {statCritDamage}x \n" +
-                $"STATUS CHANCE | {statStatusChance}% \n");
-
-            //==============================================
-
-            weaponPage.pageLines.Add(statsLine);
-
-            base.EditTooltipBook(tooltipBook);
-        }
-
-        private int CalculateReloadTime()
-        {
-            int reloadTime = 0;
-
-            return reloadTime;
-        }
+        public virtual float AddedProcChance() => 0.0f;
 
         public void Reload()
         {
-            int timer = CalculateReloadTime(); 
+            int timer = 0;
 
             while (timer > 0)
             {
@@ -109,9 +80,11 @@ namespace QuasarFramework.Definitions.ItemTypes
             QuasarFramework.WriteLogger(Mod, QuasarFramework.InputType.Debug, $"Weapon reloaded, ammo: {ammoCurrent} | mag: {magazineCurrent}");
         }
 
-        public void CalculateDamageFalloff()
+        internal float CalculateProcChance(StatusEffect effectToProc)
         {
-
+            float totalChance = statStatusChance * effectToProc.effectProcChance; //0.5 sc and 0.5 proc chance = 0.25 total proc chance (0.5 with luck)
+            totalChance += AddedProcChance();
+            return totalChance;
         }
 
         public override bool? UseItem(Player player)
@@ -122,16 +95,36 @@ namespace QuasarFramework.Definitions.ItemTypes
             return base.UseItem(player);
         }
 
+        public override void EditTooltipBook(TooltipBook tooltipBook)
+        {
+            TooltipPage weaponPage = new();
+
+            weaponPage.pageTitle = "Weapon Stats";
+
+            string statsLineText =
+                $"CRITICAL CHANCE | {statCritChance}% \n" +
+                $"CRITICAL DAMAGE | {statCritDamage}x \n" +
+                $"STATUS CHANCE | {statStatusChance}% \n";
+
+            if (weaponArchetype.isRanged)
+                statsLineText +=
+                    $"RANGE | {statRange} \n" +
+                    $"RELOAD SPEED | {statReload} \n";
+
+            var statsLine = new TooltipLine(Mod, "statsLine", statsLineText);
+
+            //==============================================
+
+            weaponPage.pageLines.Add(statsLine);
+
+            base.EditTooltipBook(tooltipBook);
+        }
+
         public override void OnCreated(ItemCreationContext context)
         {
             augmentSlots ??= new(4);
 
             base.OnCreated(context);
-        }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
         }
 
         public override void UpdateInventory(Player player)

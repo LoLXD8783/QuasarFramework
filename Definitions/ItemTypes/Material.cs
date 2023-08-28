@@ -17,7 +17,7 @@
         {
             Item.material = true;
 
-            Item.maxStack = int.MaxValue; //we want an infinite stack since materials can drop in large quantities. (500-2500 and so on if stacked)
+            Item.maxStack = int.MaxValue; //we want an """infinite""" stack since materials can drop in large quantities. (500-2500 and so on if stacked)
 
             base.SetDefaults();
         }

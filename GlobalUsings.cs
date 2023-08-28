@@ -9,7 +9,6 @@ global using QuasarFramework.Definitions.QuasarPlayerPartials;
 global using QuasarFramework.Enums;
 global using QuasarFramework.Loaders;
 
-global using ReLogic;
 global using ReLogic.Content;
 
 global using Steamworks;
@@ -24,7 +23,6 @@ global using System.Threading;
 
 global using Terraria;
 global using Terraria.Audio;
-global using Terraria.Chat;
 global using Terraria.DataStructures;
 global using Terraria.GameContent;
 global using Terraria.ID;

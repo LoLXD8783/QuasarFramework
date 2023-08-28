@@ -11,8 +11,6 @@
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Definitions\ProjectileTypes\" />
-    <Folder Include="Definitions\NPCTypes\" />
     <Folder Include="Globals\" />
     <Folder Include="GUI\SocialGUI\" />
     <Folder Include="GUI\TradingGUI\" />

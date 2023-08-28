@@ -2,13 +2,19 @@
 {
     public abstract class Archetype : ModType
     {
-        public int ID { get; private set; }
-
         private int useCooldownTimer;
 
         public bool isMelee;
 
         public bool isRanged;
+
+        public int ID { get; private set; }
+
+        public int statHeavyAttackDamage;
+
+        public int statRange;
+
+        public int statReloadSpeed;
 
         /// <summary>
         /// Allows you to determine when a weapon with this archetype can be used.
@@ -27,7 +33,7 @@
         {
             ModTypeLookup<Archetype>.Register(this);
 
-            //ID = ...
+            ID = ArchetypeLoader.Add(this);
         }
 
         public sealed override void SetupContent()

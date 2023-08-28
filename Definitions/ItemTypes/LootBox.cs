@@ -2,9 +2,9 @@
 {
     public abstract class LootBox : QuasarItem
     {
-        public Dictionary<Item, int> lootPool;
+        public Dictionary<QuasarItem, int> lootPool;
 
-        public static Item GiveReward(Dictionary<Item, int> pool)
+        public static QuasarItem GiveReward(Dictionary<QuasarItem, int> pool)
         {
             int totalWeight = 0;
 

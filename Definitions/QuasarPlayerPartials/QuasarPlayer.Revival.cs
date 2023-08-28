@@ -8,32 +8,37 @@
 
         public int reviveTimer;
 
-        public const int selfReviveTimer = 300;
+        public const int selfReviveTimer = 300; //self res timer for all patrol / local / easy activities.
 
-        public const int selfReviveTimerHard = 9000;
+        public const int selfReviveTimerHard = 9000; //self res timer for all hard / 3-man activities.
 
         public Vector2 respawnAnchorLastPos;
 
-        public Vector2 GetRespawnAnchorPosition()
+        public Vector2 TryGetRespawnAnchorPosition()
         {
             if (Player.whoAmI != Main.myPlayer)
                 return Vector2.Zero;
 
             else
             {
-                Vector2 currentPos = new(Player.position.X, Player.position.Y);
+                Vector2 currentPos = new(Player.position.ToWorldCoordinates().X, Player.position.ToWorldCoordinates().Y);
                 return currentPos;
             }
         }
 
-        public void ReviveMe()
+        public void ReviveMe(QuasarPlayer player)
         {
+            Player.SpawnX = (int)respawnAnchorLastPos.ToWorldCoordinates().X;
 
-            OnRevive();
+            Player.SpawnY = (int)respawnAnchorLastPos.ToWorldCoordinates().Y;
+
+            Player.Spawn(PlayerSpawnContext.ReviveFromDeath);
+
+            OnRevive(player);
         }
 
         /// <summary> Allows you to make things happen when this player is revived. <para></para> Useful for resetting effects or states. </summary>
-        public virtual void OnRevive() { }
+        public virtual void OnRevive(QuasarPlayer player) { }
 
         public override void PreUpdateMovement()
         {
@@ -44,7 +49,8 @@
             {
                 Vector2 storedPos = respawnAnchorLastPos;
 
-                respawnAnchorLastPos = GetRespawnAnchorPosition();
+                respawnAnchorLastPos = TryGetRespawnAnchorPosition();
+
 
             }
 
