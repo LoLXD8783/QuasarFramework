@@ -6,6 +6,8 @@
 
         public int experienceLevelRequirement;
 
+        private const int _expLevelReqPost2 = 300000;
+
         private const int _expLevelReqPost = 450000;
             
         public int experienceTotal;
@@ -20,11 +22,23 @@
         {
             //play sound
 
+            //play animation
+
             experienceTotal += experienceCurrent;
 
             experienceCurrent = 0;
 
             levelCurrent += 1;
+
+            if (levelCurrent >= levelMaximum)
+            {
+                levelCurrent = levelMaximum;
+
+                experienceLevelRequirement = _expLevelReqPost2;
+
+                PostLevelCapReward();
+            }
+                
 
             if (levelCurrent >= 20)
                 experienceLevelRequirement = _expLevelReqPost;
@@ -32,11 +46,16 @@
             else
                 experienceLevelRequirement = RecalculateExperienceCap(levelCurrent);
 
+            OnLevelUp();
+
             //display stats up window
 
             //choose reward window
+        }
 
-            OnLevelUp();
+        public void PostLevelCapReward()
+        {
+
         }
 
         public virtual void OnLevelUp() { }

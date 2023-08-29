@@ -1,6 +1,7 @@
 ﻿namespace QuasarFramework.Definitions.NPCTypes
 {
-    internal class Enemy
+    public abstract class Enemy : QuasarNPC
     {
+
     }
 }

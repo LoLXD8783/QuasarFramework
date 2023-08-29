@@ -8,6 +8,10 @@
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot) => false;
 
+        public override void Load()
+        {
 
+            base.Load();
+        }
     }
 }

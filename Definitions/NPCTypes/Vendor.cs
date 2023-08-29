@@ -9,7 +9,7 @@
         public bool BuyFromMe(out QuasarItem item)
         {
             //check required currency
-            //if currency isn't sufficient, return false
+            //if currency isn't sufficient, play / animation sound and return false
             //else, proceed with purchase
 
             OnPurchaseSomething();

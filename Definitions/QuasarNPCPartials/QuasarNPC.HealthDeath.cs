@@ -7,9 +7,11 @@
         public int armor;
 
         public int healthCurrent;
+
         public int healthMaximum;
 
         public int shieldsCurrent;
+
         public int shieldsMaximum;
 
 

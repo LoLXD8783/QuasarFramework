@@ -8,13 +8,13 @@
 
         public float effectProcChance;
 
-        public int effectTimeCurrent;
-
-        public int effectTimeMaximum;
-
         public int effectStack;
 
         public int effectStackMaximum;
+
+        public int effectTimeCurrent;
+
+        public int effectTimeMaximum;
 
         public int ID { get; private set; }
 

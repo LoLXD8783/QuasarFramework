@@ -1,10 +1,12 @@
 ﻿namespace QuasarFramework.Definitions
 {
-    public abstract class Trait : ModType, ILocalizedModType
+    public abstract class Trait : ModType
     {
         public int ID { get; private set; }
 
-        public string LocalizationCategory => "Trait";
+        public string traitName;
+
+        public string traitDescription;
 
         public virtual void SetDefaults() { }
 
