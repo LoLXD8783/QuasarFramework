@@ -2,20 +2,19 @@
 {
     public partial class QuasarPlayer : ModPlayer
     {
-        /// <summary> Whether or not this player will use pre-determined hit effects. <para></para> Return false to write your own logic in <see cref="OnHit()"/> </summary>
         public bool useVanillaHitEffects = true;
 
-        /// <summary>Replaces Defense as the damage reduction for armor and other modifiers.</summary>
         public int armorTotal;
 
-        /// <summary>
-        /// Maximum => The maximum amount of health a player can have. <para></para>
-        /// Current => The Current amount of health a player has in a given instance. <para></para>
-        /// "Over" => The amount of additive-decaying health given from life-steal and other temporary effects.
-        /// </summary>
-        public int healthMaximum, healthCurrent, overHealth;
+        public int healthCurrent;
 
-        public int shieldsMaximum, shieldsCurrent;
+        public int healthMaximum;
+        
+        public int overHealth;
+
+        public int shieldsCurrent;
+
+        public int shieldsMaximum;
 
         /// <summary> Automatically kills the player. </summary>
         public void KillMe()
