@@ -2,15 +2,25 @@
 {
     public abstract class Ability : ModType, ILocalizedModType
     {
-        public int ID { get; private set; }
+        public bool isActive;
 
-        public int castCooldown;
+        public CastType castType;
 
-        public int castTime;
+        public int castCooldownMaximum;
+
+        public int castCooldownCurrent;
+
+        public int castTimeMaximum;
+
+        public int castTimeCurrent;
 
         public int energyCost;
 
         public int energyOverTime;
+
+        public ModKeybind abilityKeybind;
+
+        public int ID { get; private set; }
 
         public string LocalizationCategory => "Ability";
 
@@ -37,5 +47,12 @@
         }
 
         public override string ToString() => Name;
+
+        public enum CastType
+        {
+            SINGLE,
+            TOGGLE,
+            CHARGE
+        }
     }
 }

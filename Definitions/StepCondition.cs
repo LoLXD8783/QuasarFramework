@@ -4,6 +4,12 @@
     {
         public bool isConditionCompleted;
 
-        public void UpdateCondition() { }
+        public string conditionDescription;
+
+        public virtual bool StateCondition(QuasarPlayer player) => false;
+
+        public virtual void SetDefaults() { }
+
+        public virtual void UpdateCondition() { }
     }
 }

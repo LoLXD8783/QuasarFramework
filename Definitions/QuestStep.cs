@@ -8,7 +8,10 @@
 
         public List<StepCondition> stepConditions;
 
-
+        public QuestStep(List<StepCondition> stepConditions)
+        {
+            this.stepConditions = stepConditions;
+        }
 
         public void UpdateStepConditions() 
         {
