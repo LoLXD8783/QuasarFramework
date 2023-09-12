@@ -1,4 +1,5 @@
-﻿using QuasarFramework.Systems;
+﻿using QuasarFramework.Definitions.AbilityTypes;
+using QuasarFramework.Systems;
 
 namespace QuasarFramework.Definitions.QuasarPlayerPartials
 {
@@ -14,9 +15,19 @@ namespace QuasarFramework.Definitions.QuasarPlayerPartials
 
         public List<Ability> playerAbilities = new(4);
 
-        public void CastAbility(Ability ability, ModKeybind castKeybind)
+        public static void CastAbility(Ability ability, ModKeybind castKeybind)
         {
+            if (ability is Ability_SingleCast && castKeybind.JustPressed)
+                ability.OnCastType();
 
+            if (ability is Ability_ChargeCast && castKeybind.Current)
+                ability.OnCastType();
+
+            if (ability is Ability_ToggleCast && castKeybind.JustPressed)
+            {
+                ability.OnCastType();
+                ability.isActive ^= true;
+            }
         }
 
         public void EnergyRegeneration()
@@ -50,14 +61,9 @@ namespace QuasarFramework.Definitions.QuasarPlayerPartials
 
         public void UpdateAbilities()
         {
+            passiveAbility?.PassiveEffect(this);
 
-            foreach (Ability ab in playerAbilities)
-            {
-                if (ab.castCooldownCurrent > 0)
-                    ab.castCooldownCurrent--;
 
-                
-            }
         }
 
         public virtual void ModifyRegenerationRate() { }

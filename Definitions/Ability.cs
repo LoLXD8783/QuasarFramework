@@ -4,7 +4,7 @@
     {
         public bool isActive;
 
-        public CastType castType;
+        public CastType castType; //change to custom typing (more variation)
 
         public int castCooldownMaximum;
 
@@ -18,9 +18,9 @@
 
         public int energyOverTime;
 
-        public ModKeybind abilityKeybind;
-
         public int ID { get; private set; }
+
+        public ModKeybind abilityKeybind;
 
         public string LocalizationCategory => "Ability";
 
@@ -30,7 +30,9 @@
 
         public virtual void PassiveEffect(QuasarPlayer player) { }
 
-        public virtual void OnCast() { }
+        public virtual void OnCast() { } //custom cast parameters by ability
+
+        internal virtual void OnCastType() { } //custom cast parameters by type of ability
 
         protected sealed override void Register()
         {
@@ -48,7 +50,7 @@
 
         public override string ToString() => Name;
 
-        public enum CastType
+        public enum CastType //change to custom typing (more variation)
         {
             SINGLE,
             TOGGLE,
