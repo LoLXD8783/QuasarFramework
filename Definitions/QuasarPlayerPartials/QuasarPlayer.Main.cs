@@ -48,6 +48,8 @@
             energyMaximum += playerSpecialization.additiveEnergy;
             healthMaximum += playerSpecialization.additiveHealth;
             shieldsMaximum += playerSpecialization.additiveShields;
+
+            UpdateAbilitySets();
         }
 
         public override void PreUpdate()

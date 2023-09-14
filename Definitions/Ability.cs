@@ -4,8 +4,6 @@
     {
         public bool isActive;
 
-        public CastType castType; //change to custom typing (more variation)
-
         public int castCooldownMaximum;
 
         public int castCooldownCurrent;
@@ -24,6 +22,16 @@
 
         public string LocalizationCategory => "Ability";
 
+        public void CastMe()
+        {
+            if (CanCast())
+            {
+                OnCastType();
+
+                OnCast();
+            }
+        }
+
         public virtual bool CanCast() => true;
 
         public virtual void SetDefaults() { }
@@ -32,7 +40,7 @@
 
         public virtual void OnCast() { } //custom cast parameters by ability
 
-        internal virtual void OnCastType() { } //custom cast parameters by type of ability
+        protected virtual void OnCastType() { } //custom cast parameters by type of ability
 
         protected sealed override void Register()
         {
@@ -49,12 +57,5 @@
         }
 
         public override string ToString() => Name;
-
-        public enum CastType //change to custom typing (more variation)
-        {
-            SINGLE,
-            TOGGLE,
-            CHARGE
-        }
     }
 }

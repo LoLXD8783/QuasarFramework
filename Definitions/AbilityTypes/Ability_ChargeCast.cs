@@ -10,7 +10,7 @@
 
         public virtual void UpdateWhileCharge() { }
 
-        internal sealed override void OnCastType()
+        protected sealed override void OnCastType()
         {
             int storedLevel = 0;
 

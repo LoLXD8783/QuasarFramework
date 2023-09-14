@@ -3,7 +3,8 @@
 
     public enum PlayerMessageType : byte
     {
-        ExperienceSync
+        ExperienceSync,
+        MaterialInventorySync
     }
 
     public enum QuestMessageType : byte

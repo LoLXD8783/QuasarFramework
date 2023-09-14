@@ -18,14 +18,14 @@ namespace QuasarFramework.Definitions.QuasarPlayerPartials
         public static void CastAbility(Ability ability, ModKeybind castKeybind)
         {
             if (ability is Ability_SingleCast && castKeybind.JustPressed)
-                ability.OnCastType();
+                ability.CastMe();
 
             if (ability is Ability_ChargeCast && castKeybind.Current)
-                ability.OnCastType();
+                ability.CastMe();
 
             if (ability is Ability_ToggleCast && castKeybind.JustPressed)
             {
-                ability.OnCastType();
+                ability.CastMe();
                 ability.isActive ^= true;
             }
         }
@@ -63,7 +63,11 @@ namespace QuasarFramework.Definitions.QuasarPlayerPartials
         {
             passiveAbility?.PassiveEffect(this);
 
-
+            foreach (Ability ab in playerAbilities)
+            {
+                if (ab.castCooldownCurrent > 0)
+                    ab.castCooldownCurrent--;
+            }
         }
 
         public virtual void ModifyRegenerationRate() { }
