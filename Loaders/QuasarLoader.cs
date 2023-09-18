@@ -45,7 +45,7 @@
 
     public sealed class ElementLoader : QuasarLoader<Element> { }
 
-    public sealed class FactionLoader : QuasarLoader<Ability> { }
+    public sealed class FactionLoader : QuasarLoader<Faction> { }
 
     public sealed class QuasarRarityLoader : QuasarLoader<QuasarRarity> { }
 

@@ -1,3 +1,5 @@
+using QuasarFramework.Loaders;
+
 namespace QuasarFramework
 {
 	//Loader Logger

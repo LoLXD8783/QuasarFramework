@@ -1,4 +1,6 @@
-﻿namespace QuasarFramework.Definitions
+﻿using QuasarFramework.Loaders;
+
+namespace QuasarFramework.Definitions
 {
     public abstract class Ability : ModType, ILocalizedModType
     {

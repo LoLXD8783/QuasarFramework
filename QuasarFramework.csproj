@@ -11,10 +11,9 @@
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Globals\" />
     <Folder Include="GUI\SocialGUI\" />
     <Folder Include="GUI\TradingGUI\" />
-    <Folder Include="Systems\" />
+    <Folder Include="NewFolder\" />
     <Folder Include="TWCLib\Definitions\" />
     <Folder Include="TWCLib\WorldGen\" />
   </ItemGroup>

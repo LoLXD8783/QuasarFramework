@@ -1,4 +1,6 @@
-﻿namespace QuasarFramework.Definitions
+﻿using QuasarFramework.Loaders;
+
+namespace QuasarFramework.Definitions
 {
     public abstract class QuasarRarity : ModType
     {
@@ -19,7 +21,7 @@
         {
             ModTypeLookup<QuasarRarity>.Register(this);
 
-            ID = QRarityLoader.Add(this);
+            ID = QuasarRarityLoader.Add(this);
         }
 
         public sealed override void SetupContent()

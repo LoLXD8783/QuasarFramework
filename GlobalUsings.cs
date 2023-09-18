@@ -7,7 +7,6 @@ global using QuasarFramework.Definitions.ItemTypes;
 global using QuasarFramework.Definitions.QuasarNPCPartials;
 global using QuasarFramework.Definitions.QuasarPlayerPartials;
 global using QuasarFramework.Enums;
-global using QuasarFramework.Loaders;
 
 global using ReLogic.Content;
 
@@ -18,8 +17,12 @@ global using System.Collections;
 global using System.Collections.Generic;
 global using System.IO;
 global using System.Linq;
+global using System.Net;
+global using System.Net.Sockets;
 global using System.Reflection;
+global using System.Text;
 global using System.Threading;
+global using System.Threading.Tasks;
 
 global using Terraria;
 global using Terraria.Audio;

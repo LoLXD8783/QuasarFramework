@@ -1,4 +1,6 @@
-﻿namespace QuasarFramework.Definitions
+﻿using QuasarFramework.Loaders;
+
+namespace QuasarFramework.Definitions
 {
     /// <summary>
     /// A specializaton is a stand-in for a specialist system. <para></para>

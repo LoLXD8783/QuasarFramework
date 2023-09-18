@@ -1,4 +1,6 @@
-﻿namespace QuasarFramework.Definitions
+﻿using QuasarFramework.Loaders;
+
+namespace QuasarFramework.Definitions
 {
     public abstract class Faction : ModType, ILocalizedModType
     {
@@ -21,8 +23,6 @@
             ModTypeLookup<Faction>.Register(this);
 
             ID = FactionLoader.Add(this);
-
-            throw new NotImplementedException();
         }
 
         public sealed override void SetupContent()
