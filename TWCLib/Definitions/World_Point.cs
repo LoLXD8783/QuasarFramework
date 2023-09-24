@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuasarFramework.GUI.ChatGUI
+namespace QuasarFramework.TWCLib.Definitions
 {
-    internal class ChatSystem
+    internal class World_Point
     {
     }
 }

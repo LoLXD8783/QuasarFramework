@@ -83,8 +83,6 @@ namespace QuasarFramework
 
 			TraitLoader.Unload();
 
-			CloseConnection(connection);
-
             base.Unload();
 		}
 	}
@@ -110,49 +108,6 @@ namespace QuasarFramework
 			}
 
             base.HandlePacket(reader, whoAmI);
-        }
-    }
-
-	//DB Handler
-	partial class QuasarFramework
-	{
-		public string userName;
-
-		public CSteamID userSteamID;
-
-		public SecureString passWord;
-
-		public SqlConnection connection;
-
-		public void LoginToDatabase(string connectString, string username, SecureString password)
-		{
-			//communicate with UI for this one
-
-			SqlCredential cred = new(username, password);
-
-			OpenConnection(connectString, cred, out connection);
-		}
-
-		public static void CloseConnection(SqlConnection conn) => conn.Close();
-
-		public static void OpenConnection(string connectString, SqlCredential cred, out SqlConnection conn)
-		{
-			SqlConnection connection = new(connectString, cred);
-			connection.Open();
-
-			conn = connection;
-		}
-
-        public static void Query(string instruction, SqlConnection conn)
-        {
-            SqlCommand comm = new(instruction, conn);
-            using (SqlDataReader reader = comm.ExecuteReader())
-            {
-                if (reader.Read())
-                {
-
-                }
-            }
         }
     }
 }

@@ -1,3 +1,8 @@
 displayName = Quasar Mod Framework
-author = Event Horizon Games
+author = Æterna
 version = 1.0
+
+side = Both
+
+hideCode = true
+hideResources = true

@@ -6,7 +6,7 @@
         /// A newly configurable book of tooltips for tooltip manipulation. <para></para>
         /// See documentation for proper usage.
         /// </summary>
-        public TooltipBook? tooltipBook;
+        public TooltipBook tooltipBook;
 
         /// <summary>
         /// The current page of your tooltip book being displayed.

@@ -14,7 +14,6 @@
   <ItemGroup>
     <Folder Include="GUI\SocialGUI\" />
     <Folder Include="GUI\TradingGUI\" />
-    <Folder Include="TWCLib\Definitions\" />
-    <Folder Include="TWCLib\WorldGen\" />
+    <Folder Include="TWCLib\Helpers\" />
   </ItemGroup>
 </Project>
