@@ -1,19 +1,19 @@
 ﻿namespace QuasarFramework.TWCLib.Definitions
 {
-    internal class World_Fold
+    internal struct WorldFold
     {
         public Rectangle FoldDimensions { get; set; }
 
-        public World_Plane planeToTravelTo;
+        public WorldPlane planeToTravelTo;
 
-        public World_Fold(World_Plane toPlane, Rectangle foldDimensions) 
+        public WorldFold(WorldPlane toPlane, Rectangle foldDimensions) 
         { 
             planeToTravelTo = toPlane;
 
             this.FoldDimensions = foldDimensions;
         }
 
-        public World_Fold(World_Plane toPlane, int x, int y, int height, int width)
+        public WorldFold(WorldPlane toPlane, int x, int y, int height, int width)
         {
             planeToTravelTo = toPlane;
 
